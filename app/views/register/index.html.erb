@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MyApp - Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  
+  <body>
+    <div class="jumbotron">
+      <h1>Community Wall</h1>      
+      <p>Stay connected with your collegues..</p>
+    </div>
+    
+    <%= link_to '<- back', login_index_path %>
+    <h2>Register</h2>
+
+    <%= form_for :user do |f| %>
+      <table>
+        <tr> <td>Username</td> <td><%= f.text_field :username, class: 'form-control', placeholder: 'Username' %><td/> </tr>
+        <tr> <td>Password</td> <td><%= f.password_field :password, class: 'form-control', placeholder: 'Password' %> </td> </tr>
+        <tr> <td>Full Name</td> <td><%= f.text_field :full_name, class: 'form-control', placeholder: 'Full Name' %> </td> </tr>
+        <tr> <td colspan='2'><%= f.submit "Register User", class: 'form-control btn btn-info' %></td> </tr>
+      </table>
+    <% end %>
+
+
+  </body>
+</html>

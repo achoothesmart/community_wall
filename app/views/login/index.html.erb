@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MyApp - Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <div class="jumbotron">
+      <h1>Community Wall</h1>      
+      <p>Stay connected with your collegues..</p>
+    </div>
+
+
+    <%= form_for :user do |f| %>
+      <table>
+        <tr> <td>Username</td> <td><%= f.text_field :username, class: 'form-control', placeholder: 'Username' %><td/> </tr>
+        <tr> <td>Password</td> <td><%= f.password_field :password, class: 'form-control', placeholder: 'Password' %> </td> </tr>
+        <tr> <td colspan='2'><%= f.submit "Login", class: 'btn btn-info' %></td> </tr>
+      </table>
+    <% end %>
+
+    <% if session[:login_failed] == true %>
+      <div class='error'> <%= session[:login_msg] %> </div>
+    <% else %>
+      <div class='message'> <%= session[:login_msg] %> </div>
+    <% end %>  
+    
+    <% session[:login_failed] = false %>
+
+    <br/>
+    Or <br/>
+    <%= link_to "Register", register_index_path, class: "btn btn-home"  %>
+  </body>
+</html>

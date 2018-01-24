@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MyApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+
+    <div class="jumbotron home">
+      <h1>Community Wall</h1>      
+      <p>Stay connected with your collegues..</p>
+    </div>
+    
+    <div id='divCurrUser' class='row'>
+      <div class='col-md-4'>
+        <span class='label label-default'>
+          Hello, <%= @curr_user.full_name %>
+        </span>
+      </div>
+      <div class='col-md-2'>
+        <%= link_to 'Logout', logout_login_index_path, class: 'float-md-right' %>
+      </div>
+    </div>
+
+    <div id='divPost'>
+      <%= form_tag("/message", method: "post") do %>  
+        <div class='row'>
+          <div class='col-md-6'>
+            <%= text_area_tag :message_text, '', class: 'form-control', placeholder: 'what you did interesting today?' %>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-6'>
+            <%= submit_tag "Post Message", class: 'btn btn-info float-md-right' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+    <div id='divMessages'>
+      <span class='badge'>
+        <%= @messages.count %> messages in wall
+      </span>
+
+      <div class='list-group col-md-6'>
+        <% @messages.each do |message| %>
+          <a class='list-group-item message-box'>
+
+            <span class='message-metadata'>
+              <%= @curr_user.id == message.user_id ? 'You' : message.user.full_name %> posted on <%= message.created_at %>
+            </span>
+            
+            <p class='list-group-item-text'>
+              <%= message.message_text %>
+            </p>
+
+            <span class='message-metadata'>
+              <%= message.likes.count %> Likes, <%= message.comments.count %> Comments
+            </span>
+            <%# Comments Thread.. %>
+            <span class='message-comments'>
+            
+              <ul class='list-group'>
+                <% message.comments.each do |comment| %>
+                  <li class='list-group-item comment-item'> 
+                    <span class='badge'>
+                      <%= @curr_user.id == comment.user.id ? 'You' : comment.user.full_name %>: 
+                    </span>
+                    <%= comment.cmt_text %>
+                  </li>
+                <% end %>
+
+                <li class='list-group-item'>
+                  <div class='row like-comment'>
+                    <div class='col-md-1'>
+                      <%# Like %>
+                      <%= form_tag("/like", method: "post") do %>
+                        <input type='hidden' name='message_id' value='<%= message.id %>'>
+                        <% @like = message.likes.select{ |l| l.user_id == @curr_user.id } %>
+                        <% @like_btn_txt = @like == [] ? 'Like' : 'Unlike' %>
+                        <input type='submit' class='btn btn-default message-button like-message' value='<%= @like_btn_txt %>'/>
+                      <% end %>
+                    </div>
+
+                    <div class='col-md-11'>
+                      <%# Comment %>
+                      <span class='message-comment'>
+                        
+                        <%= form_tag("/comment", method: "post") do %>
+                          <div class="input-group mb-3">
+                            <input type="text" name='cmt_text' class="form-control" placeholder="Write your comment..">
+                            <input type='hidden' name='message_id' value='<%= message.id %>' />
+                            <div class="input-group-append">
+                              <input type='submit' class="input-group-button btn btn-default" value='Add Comment'/>
+                            </div>
+                          </div>
+                        <% end %>
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </span>
+
+            
+
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

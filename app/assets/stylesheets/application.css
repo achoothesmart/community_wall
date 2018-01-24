@@ -1,0 +1,76 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*= require bootstrap.min
+*/
+
+.jumbotron.home{
+	padding: 5px 10px;
+}
+
+body{
+	background-color: cornsilk
+}
+
+.error{
+	color: red;
+}
+
+.message-box{
+	
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 3px;
+	border-color:  rgb(240, 252, 255);
+}
+
+.message-box:hover{
+	border-color: skyblue;
+}
+
+.message-metadata{
+	display: block;
+	font-size: 75%;
+	color: #818a91;
+}
+
+.message-button{
+	padding: .25rem .5rem;
+	cursor: pointer;
+	border-radius: .25rem;
+	font-size: 75%;
+	background-color: transparent;
+}
+
+.message-button:hover{
+	color: white;
+	background-color: #027de7
+}
+
+.like-message{
+	bottom: .5rem;
+	left: .5rem;
+}
+
+.message-comments .list-group-item{
+	padding: 2px 10px;
+}
+
+.message-comments .comment-item:hover{
+	background-color: skyblue;
+	cursor: pointer;
+}
+
+
+
